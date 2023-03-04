@@ -1,10 +1,14 @@
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import { AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai';
+
+import useLoginModal from '@/hooks/useLoginModal';
+
 import Avatar from '../Avatar';
 
 const PostItem = () => {
   const router = useRouter();
+  const loginModal = useLoginModal();
   
   const goToProfile = useCallback((ev: any) => {
     ev.stopPropagation();
@@ -17,9 +21,8 @@ const PostItem = () => {
 
   const onLike = useCallback((ev: any) => {
     ev.stopPropagation();
-
-    return;
-  }, []);
+    loginModal.onOpen();
+  }, [loginModal]);
 
   return (
     <div 

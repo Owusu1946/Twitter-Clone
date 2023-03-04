@@ -1,23 +1,16 @@
 import { BiCalendar } from "react-icons/bi";
 
-import Button from "../Button";
-import LoginModal from "../modals/LoginModal";
-import RegisterModal from "../modals/RegisterModal";
+import useLoginModal from "@/hooks/useLoginModal";
 
-const isLoggedIn = false;
+import Button from "../Button";
 
 const ProfileBio = () => {
+  const loginModal = useLoginModal();
+
   return ( 
     <div className="border-b-[1px] border-neutral-800 pb-4">
       <div className="flex justify-end p-2">
-        {isLoggedIn ? (
-        <Button onClick={() => {}} secondary label="Follow" />
-        ) : (
-          <div className="flex flex-row items-center gap-2">
-            <LoginModal />
-            <RegisterModal />
-          </div>
-        )}
+        <Button onClick={loginModal.onOpen} secondary label="Follow" />
       </div>
       <div className="mt-8 px-4">
         <div className="flex flex-col">

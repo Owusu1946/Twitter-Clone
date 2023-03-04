@@ -8,10 +8,11 @@ interface ModalProps {
   onSubmit: () => void;
   title?: string;
   body?: React.ReactElement;
+  footer?: React.ReactElement;
   actionLabel: string;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onSubmit, title, body, actionLabel }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onSubmit, title, body, actionLabel, footer }) => {
   const handleClose = useCallback(() => {
     onClose();
   }, [onClose]);
@@ -92,6 +93,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onSubmit, title, body, a
             {/*footer*/}
             <div className="flex flex-col gap-2 p-10">
               <Button label={actionLabel} secondary fullWidth large onClick={handleSubmit} />
+              {footer}
             </div>
           </div>
         </div>

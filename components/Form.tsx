@@ -2,10 +2,11 @@ import { BiImage } from 'react-icons/bi';
 import { HiOutlineGif } from 'react-icons/hi2';
 import { IoLocationSharp } from 'react-icons/io5';
 
+import useLoginModal from '@/hooks/useLoginModal';
+import useRegisterModal from '@/hooks/useRegisterModal';
+
 import Avatar from './Avatar';
 import Button from './Button';
-import LoginModal from './modals/LoginModal';
-import RegisterModal from './modals/RegisterModal';
 
 const isLoggedIn = false;
 
@@ -14,6 +15,9 @@ interface FormProps {
 }
 
 const Form: React.FC<FormProps> = ({ placeholder }) => {
+  const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
+
   return (
     <div className="border-b-[1px] border-neutral-800 px-5 py-2">
       {isLoggedIn ? (
@@ -67,8 +71,8 @@ const Form: React.FC<FormProps> = ({ placeholder }) => {
         <div className="py-8">
           <h1 className="text-white text-2xl text-center mb-4 font-bold">Welcome to Twitter</h1>
           <div className="flex flex-row items-center justify-center gap-4">
-            <LoginModal />
-            <RegisterModal />
+            <Button label="Login" onClick={loginModal.onOpen} />
+            <Button label="Register" onClick={registerModal.onOpen} secondary />
           </div>
         </div>
       )}

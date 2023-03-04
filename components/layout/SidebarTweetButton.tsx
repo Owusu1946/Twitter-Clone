@@ -1,8 +1,12 @@
 import { FaFeather } from "react-icons/fa";
 
+import useLoginModal from "@/hooks/useLoginModal";
+
 const SidebarTweetButton = () => {
+  const loginModal = useLoginModal();
+
   return (
-    <div>
+    <div onClick={loginModal.onOpen}>
       <div className="
         mt-6
         lg:hidden 

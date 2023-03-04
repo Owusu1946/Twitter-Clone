@@ -1,5 +1,7 @@
-import { useState } from "react";
-import Button from "../Button";
+import { useCallback } from "react";
+
+import useLoginModal from "@/hooks/useLoginModal";
+import useRegisterModal from "@/hooks/useRegisterModal";
 
 import Input from "../Input";
 import Modal from "../Modal";
@@ -15,21 +17,44 @@ const ModalBody = () => {
   )
 }
 
-const RegisterModal = () => {
-  const [showModal, setShowModal] = useState(false);
+const ModalFooter = () => {
+  const loginModal = useLoginModal();
+  const registerModal = useRegisterModal();
+
+  const onClick = useCallback(() => {
+    registerModal.onClose();
+    loginModal.onOpen();
+  }, [loginModal, registerModal]);
 
   return (
-    <>
-      <Button onClick={() => setShowModal(true)} label="Register" secondary />
-      <Modal
-        isOpen={showModal}
-        title="Create an account"
-        actionLabel="Register"
-        onClose={() => setShowModal(false)}
-        onSubmit={() => setShowModal(false)}
-        body={<ModalBody />}
-      />
-    </>
+    <div className="text-neutral-400 text-center mt-4">
+      <p>Already have an account?
+        <span 
+          onClick={onClick} 
+          className="
+            text-white 
+            cursor-pointer 
+            hover:underline
+          "
+          > Sign in</span>
+      </p>
+    </div>
+  )
+}
+
+const RegisterModal = () => {
+  const registerModal = useRegisterModal();
+
+  return (
+    <Modal
+      isOpen={registerModal.isOpen}
+      title="Create an account"
+      actionLabel="Register"
+      onClose={registerModal.onClose}
+      onSubmit={registerModal.onClose}
+      body={<ModalBody />}
+      footer={<ModalFooter />}
+    />
   );
 }
 

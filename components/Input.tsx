@@ -19,6 +19,9 @@ const Input: React.FC<InputProps> = ({ placeholder, value, type = "text" }) => {
         rounded-md
         outline-none
         text-white
+        focus:border-sky-500
+        focus:border-2
+        transition
       " 
       />
    );
