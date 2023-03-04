@@ -5,17 +5,48 @@ import SidebarItem from '@/components/Sidebar/SidebarItem';
 import SidebarLogo from '@/components/Sidebar/SidebarLogo';
 import SidebarTweetButton from '@/components/Sidebar/SidebarTweetButton';
 
+const items = [
+  {
+    icon: BsHouseFill,
+    label: 'Home',
+    href: '/',
+  },
+  {
+    icon: FaHashtag,
+    label: 'Explore',
+    href: '/search',
+  },
+  {
+    icon: BsBellFill,
+    label: 'Notifications',
+    href: '/notifications',
+  },
+  {
+    icon: BsEnvelopeFill,
+    label: 'Messages',
+    href: '/messages',
+  },
+  {
+    icon: FaUser,
+    label: 'Profile',
+    href: '/profiles/123',
+  },
+]
+
 const Sidebar = () => {
   return (
     <div className="col-span-1 h-full pr-4 md:pr-6">
         <div className="flex flex-col items-end">
           <div className="space-y-2 lg:w-[230px]">
             <SidebarLogo />
-            <SidebarItem icon={BsHouseFill} label="Home" />
-            <SidebarItem icon={FaHashtag} label="Explore" />
-            <SidebarItem icon={BsBellFill} label="Notifications" />
-            <SidebarItem icon={BsEnvelopeFill} label="Messages" />
-            <SidebarItem icon={FaUser} label="Profile" />
+            {items.map((item) => (
+              <SidebarItem 
+                key={item.href} 
+                href={item.href} 
+                icon={item.icon} 
+                label={item.label}
+              />
+            ))}
             <SidebarTweetButton />
           </div>
         </div>

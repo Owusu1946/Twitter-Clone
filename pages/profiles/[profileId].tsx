@@ -1,8 +1,16 @@
-import Profile from "@/components/Profile";
+import Feed from "@/components/Feed";
+import Header from "@/components/Header";
+import ProfileBio from "@/components/ProfileBio";
+import ProfileHero from "@/components/ProfileHero";
 
 const ProfileView = () => {
   return ( 
-    <Profile />
+    <>
+      <Header showBackArrow label="Code with Antonio" />
+      <ProfileHero />
+      <ProfileBio />
+      <Feed posts={[1]} />
+    </>
    );
 }
  

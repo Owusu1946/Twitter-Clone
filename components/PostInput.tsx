@@ -2,7 +2,11 @@ import { BiImage } from 'react-icons/bi';
 import { HiOutlineGif } from 'react-icons/hi2';
 import { IoLocationSharp } from 'react-icons/io5';
 
-const FeedPostInput = () => {
+interface PostInputProps {
+  placeholder: string;
+}
+
+const PostInput: React.FC<PostInputProps> = ({ placeholder }) => {
   return (
     <div className="border-b-[1px] border-neutral-800 px-5 py-2">
       <div className="flex flex-row gap-4">
@@ -31,7 +35,7 @@ const FeedPostInput = () => {
               placeholder-neutral-500 
               text-white
             "
-            placeholder="What's happening?">
+            placeholder={placeholder}>
           </textarea>
           <hr className="opacity-0 peer-focus:opacity-100 h-[1px] w-full border-neutral-800 transition" />
           <div className="mt-4 flex flex-row items-center justify-between">
@@ -50,4 +54,4 @@ const FeedPostInput = () => {
   );
 };
 
-export default FeedPostInput;
+export default PostInput;

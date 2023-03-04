@@ -1,14 +1,22 @@
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useCallback } from 'react';
 import { IconType } from "react-icons";
 
 interface SidebarItemProps {
   label: string;
   icon: IconType;
+  href: string;
 }
 
-const SidebarItem: React.FC<SidebarItemProps> = ({ label, icon: Icon }) => {
+const SidebarItem: React.FC<SidebarItemProps> = ({ label, icon: Icon, href }) => {
+  const router = useRouter();
+
+  const onClick = useCallback(() => {
+    router.push(href);
+  }, [router, href]);
+
   return (
-    <div className="flex flex-row items-center">
+    <div onClick={onClick} className="flex flex-row items-center">
       <div className="
         rounded-full 
         h-14

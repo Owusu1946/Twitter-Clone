@@ -2,19 +2,23 @@ import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import { AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai';
 
-const FeedPost = () => {
+const PostItem = () => {
   const router = useRouter();
   
-  const handleGoToProfile = useCallback(() => {
+  const goToProfile = useCallback((ev: any) => {
+    ev.stopPropagation();
     router.push('/profiles/123')
   }, [router]);
 
+  const goToPost = useCallback(() => {
+    router.push('/posts/123');
+  }, [router]);
 
   return (
-    <div className="border-b-[1px] border-neutral-800 p-5">
+    <div onClick={goToPost} className="border-b-[1px] border-neutral-800 p-5 cursor-pointer hover:bg-neutral-900 transition">
       <div className="flex flex-row items-start gap-3">
         <img
-          onClick={handleGoToProfile}
+          onClick={goToProfile}
           className="
             rounded-full 
             w-12 
@@ -60,4 +64,4 @@ const FeedPost = () => {
   )
 }
 
-export default FeedPost;
+export default PostItem;
