@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import { AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai';
+import Avatar from './Avatar';
 
 const PostItem = () => {
   const router = useRouter();
@@ -32,18 +33,7 @@ const PostItem = () => {
         transition
       ">
       <div className="flex flex-row items-start gap-3">
-        <img
-          onClick={goToProfile}
-          className="
-            rounded-full 
-            w-12 
-            h-12 
-            hover:opacity-90 
-            transition 
-            cursor-pointer
-          "
-          src="https://pbs.twimg.com/profile_images/1590968738358079488/IY9Gx6Ok_400x400.jpg" 
-        />
+        <Avatar href="/profiles/123" />
         <div>
           <div className="flex flex-row items-center gap-2">
             <p 

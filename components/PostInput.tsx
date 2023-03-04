@@ -1,26 +1,22 @@
+import { useRouter } from 'next/router';
+import { useCallback } from 'react';
 import { BiImage } from 'react-icons/bi';
 import { HiOutlineGif } from 'react-icons/hi2';
 import { IoLocationSharp } from 'react-icons/io5';
+
+import Avatar from './Avatar';
 
 interface PostInputProps {
   placeholder: string;
 }
 
 const PostInput: React.FC<PostInputProps> = ({ placeholder }) => {
+  const router = useRouter();
+
   return (
     <div className="border-b-[1px] border-neutral-800 px-5 py-2">
       <div className="flex flex-row gap-4">
-        <img
-          className="
-            rounded-full 
-            w-12 
-            h-12 
-            hover:opacity-90 
-            transition 
-            cursor-pointer
-          "
-          src="https://pbs.twimg.com/profile_images/1625905201306644486/sNTicEIp_normal.jpg" 
-        />
+        <Avatar href="/profiles/123" />
         <div className="w-full">
           <textarea 
             className="
