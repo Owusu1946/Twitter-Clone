@@ -1,5 +1,5 @@
 import Header from '@/components/Header';
-import PostItem from '@/components/PostItem';
+import PostItem from '@/components/posts/PostItem';
 
 interface FeedProps {
   posts?: Record<string, any>[];

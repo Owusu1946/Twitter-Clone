@@ -6,11 +6,11 @@ import { IoLocationSharp } from 'react-icons/io5';
 
 import Avatar from './Avatar';
 
-interface PostInputProps {
+interface FormProps {
   placeholder: string;
 }
 
-const PostInput: React.FC<PostInputProps> = ({ placeholder }) => {
+const Form: React.FC<FormProps> = ({ placeholder }) => {
   const router = useRouter();
 
   return (
@@ -78,4 +78,4 @@ const PostInput: React.FC<PostInputProps> = ({ placeholder }) => {
   );
 };
 
-export default PostInput;
+export default Form;

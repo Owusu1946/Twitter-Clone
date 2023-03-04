@@ -4,11 +4,11 @@ import { useCallback } from "react";
 interface AvatarProps {
   src?: string;
   href: string;
-  size?: number;
+  isLarge?: boolean;
   hasBorder?: boolean;
 }
 
-const Avatar: React.FC<AvatarProps> = ({ src, href, size = 12, hasBorder }) => {
+const Avatar: React.FC<AvatarProps> = ({ src, href, isLarge, hasBorder }) => {
   const router = useRouter();
 
   const onClick = useCallback(() => {
@@ -21,8 +21,8 @@ const Avatar: React.FC<AvatarProps> = ({ src, href, size = 12, hasBorder }) => {
       className={`
         ${hasBorder ? 'border-4 border-black' : ''}
         rounded-full 
-        w-${size} 
-        h-${size} 
+        ${isLarge ? 'w-32' : 'w-12'}
+        ${isLarge ? 'h-32' : 'h-12'}
         hover:opacity-90 
         transition 
         cursor-pointer

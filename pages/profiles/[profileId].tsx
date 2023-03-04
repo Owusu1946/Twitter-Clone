@@ -1,7 +1,7 @@
 import Feed from "@/components/Feed";
 import Header from "@/components/Header";
-import ProfileBio from "@/components/ProfileBio";
-import ProfileHero from "@/components/ProfileHero";
+import ProfileBio from "@/components/profiles/ProfileBio";
+import ProfileHero from "@/components/profiles/ProfileHero";
 
 const ProfileView = () => {
   return ( 

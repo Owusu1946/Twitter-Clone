@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import { AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai';
-import Avatar from './Avatar';
+import Avatar from '../Avatar';
 
 const PostItem = () => {
   const router = useRouter();

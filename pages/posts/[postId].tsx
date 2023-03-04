@@ -1,13 +1,13 @@
 import Header from "@/components/Header";
-import PostItem from "@/components/PostItem";
-import PostInput from "@/components/PostInput";
+import Form from "@/components/Form";
+import PostItem from "@/components/posts/PostItem";
 
 const PostView = () => {
   return ( 
     <>
       <Header showBackArrow label="Tweet" />
       <PostItem />
-      <PostInput placeholder="Tweet your reply" />
+      <Form placeholder="Tweet your reply" />
     </>
    );
 }

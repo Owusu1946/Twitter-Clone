@@ -1,7 +1,7 @@
 import React from 'react';
 
-import SearchBar from "@/components/SearchBar"
-import Sidebar from "@/components/Sidebar"
+import SearchBar from "@/components/layout/SearchBar"
+import Sidebar from "@/components/layout/Sidebar"
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
