@@ -4,13 +4,17 @@ interface ButtonProps {
   fullWidth?: boolean;
   large?: boolean;
   onClick: () => void;
+  disabled?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({ label, secondary, fullWidth, onClick, large }) => {
+const Button: React.FC<ButtonProps> = ({ label, secondary, fullWidth, onClick, large, disabled }) => {
   return ( 
     <button
+      disabled={disabled}
       onClick={onClick}
       className={`
+        disabled:opacity-70
+        disabled:cursor-not-allowed
         rounded-full
         font-semibold
         hover:bg-opacity-90
