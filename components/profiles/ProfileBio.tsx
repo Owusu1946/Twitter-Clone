@@ -1,23 +1,12 @@
 import { BiCalendar } from "react-icons/bi";
 
+import Button from "../Button";
+
 const ProfileBio = () => {
   return ( 
     <div className="border-b-[1px] border-neutral-800 pb-4">
-      <div className="
-        m-4
-        ml-auto
-        w-fit
-        px-4
-        py-2
-        rounded-full
-        bg-white
-        hover:bg-opacity-90 
-        cursor-pointer
-        w-
-      ">
-        <p className="text-center font-semibold">
-          Follow
-        </p>
+      <div className="flex justify-end p-2">
+        <Button onClick={() => {}} secondary label="Follow" />
       </div>
       <div className="mt-8 px-4">
         <div className="flex flex-col">

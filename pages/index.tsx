@@ -1,6 +1,7 @@
 import Feed from "@/components/Feed"
 import Header from "@/components/Header"
 import Form from "@/components/Form"
+import RegisterModal from "@/components/modals/RegisterModal"
 
 export default function Home() {
   return (

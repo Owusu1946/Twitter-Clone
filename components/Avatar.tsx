@@ -11,7 +11,8 @@ interface AvatarProps {
 const Avatar: React.FC<AvatarProps> = ({ src, href, isLarge, hasBorder }) => {
   const router = useRouter();
 
-  const onClick = useCallback(() => {
+  const onClick = useCallback((event: any) => {
+    event.stopPropagation();
     router.push(href);
   }, [router, href]);
 
