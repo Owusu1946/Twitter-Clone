@@ -3,12 +3,14 @@ import { useCallback } from 'react';
 import { AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai';
 
 import useLoginModal from '@/hooks/useLoginModal';
+import useCurrentUser from '@/hooks/useCurrentUser';
 
 import Avatar from '../Avatar';
 
 const PostItem = () => {
   const router = useRouter();
   const loginModal = useLoginModal();
+  const { data: currentUser } = useCurrentUser();
   
   const goToProfile = useCallback((ev: any) => {
     ev.stopPropagation();
@@ -21,8 +23,11 @@ const PostItem = () => {
 
   const onLike = useCallback((ev: any) => {
     ev.stopPropagation();
-    loginModal.onOpen();
-  }, [loginModal]);
+
+    if (!currentUser) {
+      loginModal.onOpen();
+    }
+  }, [loginModal, currentUser]);
 
   return (
     <div 

@@ -4,11 +4,10 @@ import { IoLocationSharp } from 'react-icons/io5';
 
 import useLoginModal from '@/hooks/useLoginModal';
 import useRegisterModal from '@/hooks/useRegisterModal';
+import useCurrentUser from '@/hooks/useCurrentUser';
 
 import Avatar from './Avatar';
 import Button from './Button';
-
-const isLoggedIn = false;
 
 interface FormProps {
   placeholder: string;
@@ -18,9 +17,11 @@ const Form: React.FC<FormProps> = ({ placeholder }) => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
 
+  const { data: currentUser } = useCurrentUser();
+
   return (
     <div className="border-b-[1px] border-neutral-800 px-5 py-2">
-      {isLoggedIn ? (
+      {currentUser ? (
         <div className="flex flex-row gap-4">
           <Avatar href="/profiles/123" />
           <div className="w-full">

@@ -1,16 +1,27 @@
+import { useCallback } from "react";
 import { BiCalendar } from "react-icons/bi";
 
 import useLoginModal from "@/hooks/useLoginModal";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 import Button from "../Button";
 
 const ProfileBio = () => {
   const loginModal = useLoginModal();
+  const { data: currentUser } = useCurrentUser();
+
+  const onFollow = useCallback(() => {
+    if (!currentUser) {
+      return loginModal.onOpen();
+    }
+
+    return;
+  }, [currentUser, loginModal]);
 
   return ( 
     <div className="border-b-[1px] border-neutral-800 pb-4">
       <div className="flex justify-end p-2">
-        <Button onClick={loginModal.onOpen} secondary label="Follow" />
+        <Button onClick={onFollow} secondary label="Follow" />
       </div>
       <div className="mt-8 px-4">
         <div className="flex flex-col">

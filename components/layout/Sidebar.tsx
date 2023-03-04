@@ -1,12 +1,11 @@
-import { useMemo } from 'react';
-import { BsHouseFill, BsBellFill, BsEnvelopeFill } from 'react-icons/bs';
+import { signOut, useSession } from 'next-auth/react';
+import { BiLogOut } from 'react-icons/bi';
+import { BsHouseFill, BsBellFill } from 'react-icons/bs';
 import { FaHashtag, FaUser } from 'react-icons/fa';
 
 import SidebarItem from './SidebarItem';
 import SidebarLogo from './SidebarLogo';
 import SidebarTweetButton from './SidebarTweetButton';
-
-const isLoggedIn = false;
 
 const items = [
   {
@@ -34,6 +33,8 @@ const items = [
 ]
 
 const Sidebar = () => {
+  const session = useSession();
+
   return (
     <div className="col-span-1 h-full pr-4 md:pr-6">
         <div className="flex flex-col items-end">
@@ -48,6 +49,7 @@ const Sidebar = () => {
                 label={item.label}
               />
             ))}
+            {session.data && <SidebarItem onClick={() => signOut()} icon={BiLogOut} label="Logout" />}
             <SidebarTweetButton />
           </div>
         </div>

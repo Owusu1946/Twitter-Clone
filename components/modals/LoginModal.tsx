@@ -22,16 +22,18 @@ const LoginModal = () => {
 
       await signIn('credentials', {
         email,
-        password
+        password,
       });
 
       toast.success('Logged in');
+
+      loginModal.onClose();
     } catch (error) {
       toast.error('Something went wrong');
     } finally {
       setIsLoading(false);
     }
-  }, [email, password]);
+  }, [email, password, loginModal]);
 
   const onToggle = useCallback(() => {
     loginModal.onClose();
