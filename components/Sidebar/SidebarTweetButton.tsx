@@ -4,6 +4,7 @@ const SidebarTweetButton = () => {
   return (
     <div>
       <div className="
+        mt-6
         lg:hidden 
         rounded-full 
         h-14
@@ -12,7 +13,7 @@ const SidebarTweetButton = () => {
         flex
         items-center
         justify-center 
-        bg-blue-500 
+        bg-sky-500 
         hover:bg-opacity-80 
         transition 
         cursor-pointer
@@ -20,12 +21,13 @@ const SidebarTweetButton = () => {
         <FaFeather size={24} color="white" />
       </div>
       <div className="
+        mt-6
         hidden 
         lg:block 
         px-4
         py-2
         rounded-full
-        bg-blue-500
+        bg-sky-500
         hover:bg-opacity-90 
         cursor-pointer
       ">

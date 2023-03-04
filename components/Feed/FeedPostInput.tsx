@@ -31,10 +31,9 @@ const FeedPostInput = () => {
               placeholder-neutral-500 
               text-white
             "
-            placeholder="What's happening?"
-            cols={30}>
+            placeholder="What's happening?">
           </textarea>
-          <hr className="h-[1px] w-full border-neutral-800" />
+          <hr className="opacity-0 peer-focus:opacity-100 h-[1px] w-full border-neutral-800 transition" />
           <div className="mt-4 flex flex-row items-center justify-between">
             <div className="flex flex-row items-center gap-6">
               <BiImage size={26} className="text-sky-500 cursor-pointer" />

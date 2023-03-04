@@ -1,0 +1,57 @@
+import { BiCalendar } from "react-icons/bi";
+
+const ProfileBio = () => {
+  return ( 
+    <div className="border-b-[1px] border-neutral-800 pb-4">
+      <div className="
+        m-4
+        ml-auto
+        w-fit
+        px-4
+        py-2
+        rounded-full
+        bg-white
+        hover:bg-opacity-90 
+        cursor-pointer
+        w-
+      ">
+        <p className="text-center font-semibold">
+          Follow
+        </p>
+      </div>
+      <div className="mt-8 px-4">
+        <div className="flex flex-col">
+          <p className="text-white text-2xl font-semibold">
+            Code With Antonio
+          </p>
+          <p className="text-md text-neutral-500">
+            @codewithantonio
+          </p>
+        </div>
+        <div className="flex flex-col mt-4">
+          <p className="text-white">
+            As a software engineer with 7+ years of experience, I created Code With Antonio to share my love for programming and help others learn and grow in the field.
+          </p>
+          <div className="flex flex-row items-center gap-2 mt-4 text-neutral-500">
+            <BiCalendar size={24} />
+            <p>
+              Joined March 2023
+            </p>
+          </div>
+        </div>
+        <div className="flex flex-row items-center mt-4 gap-6">
+          <div className="flex flex-row items-center gap-1">
+            <p className="text-white">0</p>
+            <p className="text-neutral-500">Following</p>
+          </div>
+          <div className="flex flex-row items-center gap-1">
+            <p className="text-white">0</p>
+            <p className="text-neutral-500">Followers</p>
+          </div>
+        </div>
+      </div>
+    </div>
+   );
+}
+ 
+export default ProfileBio;
