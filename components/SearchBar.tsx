@@ -2,7 +2,16 @@ import { BsSearch } from 'react-icons/bs';
 
 const SearchBar = () => {
   return (
-    <div className="relative hidden lg:block col-span-1 h-full px-6 py-2">
+    <div 
+      className="
+        relative 
+        hidden
+        lg:block
+        col-span-1
+        h-full
+        px-6
+        py-2
+    ">
       <input 
       className="
         peer

@@ -32,7 +32,15 @@ const ProfileBio = () => {
           <p className="text-white">
             As a software engineer with 7+ years of experience, I created Code With Antonio to share my love for programming and help others learn and grow in the field.
           </p>
-          <div className="flex flex-row items-center gap-2 mt-4 text-neutral-500">
+          <div 
+            className="
+              flex 
+              flex-row 
+              items-center 
+              gap-2 
+              mt-4 
+              text-neutral-500
+          ">
             <BiCalendar size={24} />
             <p>
               Joined March 2023

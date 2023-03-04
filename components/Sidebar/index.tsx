@@ -1,9 +1,9 @@
 import { BsHouseFill, BsBellFill, BsEnvelopeFill } from 'react-icons/bs';
 import { FaHashtag, FaUser } from 'react-icons/fa';
 
-import SidebarItem from '@/components/Sidebar/SidebarItem';
-import SidebarLogo from '@/components/Sidebar/SidebarLogo';
-import SidebarTweetButton from '@/components/Sidebar/SidebarTweetButton';
+import SidebarItem from './SidebarItem';
+import SidebarLogo from './SidebarLogo';
+import SidebarTweetButton from './SidebarTweetButton';
 
 const items = [
   {

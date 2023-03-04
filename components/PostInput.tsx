@@ -37,14 +37,42 @@ const PostInput: React.FC<PostInputProps> = ({ placeholder }) => {
             "
             placeholder={placeholder}>
           </textarea>
-          <hr className="opacity-0 peer-focus:opacity-100 h-[1px] w-full border-neutral-800 transition" />
+          <hr 
+            className="
+              opacity-0 
+              peer-focus:opacity-100 
+              h-[1px] 
+              w-full 
+              border-neutral-800 
+              transition"
+          />
           <div className="mt-4 flex flex-row items-center justify-between">
             <div className="flex flex-row items-center gap-6">
-              <BiImage size={26} className="text-sky-500 cursor-pointer" />
-              <HiOutlineGif size={26} className="text-sky-500 cursor-pointer" />
-              <IoLocationSharp size={26} className="text-sky-500 cursor-pointer" />
+              <BiImage 
+                size={26} 
+                className="text-sky-500 cursor-pointer"
+              />
+              <HiOutlineGif 
+                size={26} 
+                className="text-sky-500 cursor-pointer"
+              />
+              <IoLocationSharp 
+                size={26}
+                className="text-sky-500 cursor-pointer"
+              />
             </div>
-            <div className="rounded-full px-4 py-2 bg-sky-500 text-white font-semibold cursor-pointer hover:bg-opacity-90 transition">
+            <div 
+              className="
+                rounded-full
+                px-4
+                py-2
+                bg-sky-500
+                text-white
+                font-semibold
+                cursor-pointer
+                hover:bg-opacity-90
+                transition
+            ">
               Tweet
             </div>
           </div>
