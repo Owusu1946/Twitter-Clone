@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
-import { AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai';
+import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai';
 
 import useLoginModal from '@/hooks/useLoginModal';
 import useCurrentUser from '@/hooks/useCurrentUser';
+import useLike from '@/hooks/useLike';
 
 import Avatar from '../Avatar';
 
@@ -15,6 +16,7 @@ const PostItem: React.FC<PostItemProps> = ({ data = {} }) => {
   const router = useRouter();
   const loginModal = useLoginModal();
   const { data: currentUser } = useCurrentUser();
+  const { hasLiked, toggleLike } = useLike(data.id);
 
   const goToUser = useCallback((ev: any) => {
     ev.stopPropagation();
@@ -25,17 +27,21 @@ const PostItem: React.FC<PostItemProps> = ({ data = {} }) => {
     router.push(`/posts/${data.id}`);
   }, [router, data.id]);
 
-  const onLike = useCallback((ev: any) => {
+  const onLike = useCallback(async (ev: any) => {
     ev.stopPropagation();
 
     if (!currentUser) {
-      loginModal.onOpen();
+      return loginModal.onOpen();
     }
-  }, [loginModal, currentUser]);
+
+    toggleLike();
+  }, [loginModal, currentUser, toggleLike]);
+
+  const LikeIcon = hasLiked ? AiFillHeart : AiOutlineHeart;
 
   return (
     <div 
-      onClick={goToPost} 
+      onClick={goToPost}
       className="
         border-b-[1px] 
         border-neutral-800 
@@ -103,9 +109,9 @@ const PostItem: React.FC<PostItemProps> = ({ data = {} }) => {
                 transition 
                 hover:text-red-500
             ">
-              <AiOutlineHeart size={20} />
+              <LikeIcon color={hasLiked ? 'red' : ''} size={20} />
               <p>
-                234
+                {data.likedIds.length}
               </p>
             </div>
           </div>
