@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const { currentUser } = await serverAuth(req);
 
-    const { name, username, bio, image, coverImage } = req.body;
+    const { name, username, bio, profileImage, coverImage } = req.body;
 
     if (!name || !username) {
       throw new Error('Missing fields');
@@ -25,7 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         name,
         username,
         bio,
-        image,
+        profileImage,
         coverImage
       }
     });

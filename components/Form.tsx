@@ -101,7 +101,7 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
                   className="text-sky-500 cursor-pointer"
                 />
               </div>
-              <Button disabled={isLoading || !body} onClick={onSubmit} label={isComment ? 'Reply' : 'Tweet'} />
+              <Button disabled={isLoading || !body} onClick={onSubmit} label="Tweet" />
             </div>
           </div>
         </div>

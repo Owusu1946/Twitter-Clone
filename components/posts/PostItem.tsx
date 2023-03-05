@@ -1,21 +1,21 @@
 import { useRouter } from 'next/router';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai';
+import { formatDistanceToNowStrict } from 'date-fns';
 
 import useLoginModal from '@/hooks/useLoginModal';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import useLike from '@/hooks/useLike';
 
 import Avatar from '../Avatar';
-
 interface PostItemProps {
   data: Record<string, any>;
-  isComment?: boolean;
 }
 
-const PostItem: React.FC<PostItemProps> = ({ data = {}, isComment }) => {
+const PostItem: React.FC<PostItemProps> = ({ data = {} }) => {
   const router = useRouter();
   const loginModal = useLoginModal();
+
   const { data: currentUser } = useCurrentUser();
   const { hasLiked, toggleLike } = useLike(data.id);
 
@@ -25,12 +25,8 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, isComment }) => {
   }, [router, data.user.id]);
 
   const goToPost = useCallback(() => {
-    if (isComment) {
-      return;
-    }
-
     router.push(`/posts/${data.id}`);
-  }, [router, data.id, isComment]);
+  }, [router, data.id]);
 
   const onLike = useCallback(async (ev: any) => {
     ev.stopPropagation();
@@ -43,6 +39,14 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, isComment }) => {
   }, [loginModal, currentUser, toggleLike]);
 
   const LikeIcon = hasLiked ? AiFillHeart : AiOutlineHeart;
+
+  const createdAt = useMemo(() => {
+    if (!data?.createdAt) {
+      return null;
+    }
+
+    return formatDistanceToNowStrict(new Date(data.createdAt));
+  }, [data.createdAt])
 
   return (
     <div 
@@ -75,53 +79,53 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, isComment }) => {
                 text-neutral-500
                 cursor-pointer
                 hover:underline
+                hidden
+                md:block
             ">
               @{data.user.username}
             </span>
-            <span className="text-neutral-500">
-              2h
+            <span className="text-neutral-500 text-sm">
+              {createdAt}
             </span>
           </div>
           <div className="text-white mt-1">
             {data.body}
           </div>
-          {isComment ? null : (
-            <div className="flex flex-row items-center mt-3 gap-10">
-              <div 
-                className="
-                  flex 
-                  flex-row 
-                  items-center 
-                  text-neutral-500 
-                  gap-2 
-                  cursor-pointer 
-                  transition 
-                  hover:text-sky-500
-              ">
-                <AiOutlineMessage size={20} />
-                <p>
-                  {data.comments?.length || 0}
-                </p>
-              </div>
-              <div
-                onClick={onLike}
-                className="
-                  flex 
-                  flex-row 
-                  items-center 
-                  text-neutral-500 
-                  gap-2 
-                  cursor-pointer 
-                  transition 
-                  hover:text-red-500
-              ">
-                <LikeIcon color={hasLiked ? 'red' : ''} size={20} />
-                <p>
-                  {data.likedIds.length}
-                </p>
-              </div>
+          <div className="flex flex-row items-center mt-3 gap-10">
+            <div 
+              className="
+                flex 
+                flex-row 
+                items-center 
+                text-neutral-500 
+                gap-2 
+                cursor-pointer 
+                transition 
+                hover:text-sky-500
+            ">
+              <AiOutlineMessage size={20} />
+              <p>
+                {data.comments?.length || 0}
+              </p>
             </div>
-          )}
+            <div
+              onClick={onLike}
+              className="
+                flex 
+                flex-row 
+                items-center 
+                text-neutral-500 
+                gap-2 
+                cursor-pointer 
+                transition 
+                hover:text-red-500
+            ">
+              <LikeIcon color={hasLiked ? 'red' : ''} size={20} />
+              <p>
+                {data.likedIds.length}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

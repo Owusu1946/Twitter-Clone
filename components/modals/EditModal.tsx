@@ -8,26 +8,26 @@ import useUser from "@/hooks/useUser";
 
 import Input from "../Input";
 import Modal from "../Modal";
-import Dropzone from "../Dropzone";
+import ImageUpload from "../ImageUpload";
 
 const EditModal = () => {
   const { data: currentUser } = useCurrentUser();
   const { mutate: mutateFetchedUser } = useUser(currentUser?.id);
   const editModal = useEditModal();
 
-  const [image, setImage] = useState('');
+  const [profileImage, setProfileImage] = useState('');
   const [coverImage, setCoverImage] = useState('');
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [bio, setBio] = useState('');
 
   useEffect(() => {
-    setImage(currentUser?.image)
+    setProfileImage(currentUser?.profileImage)
     setCoverImage(currentUser?.coverImage)
     setName(currentUser?.name)
     setUsername(currentUser?.username)
     setBio(currentUser?.bio)
-  }, [currentUser?.name, currentUser?.username, currentUser?.bio, currentUser?.image, currentUser?.coverImage]);
+  }, [currentUser?.name, currentUser?.username, currentUser?.bio, currentUser?.profileImage, currentUser?.coverImage]);
   
   const [isLoading, setIsLoading] = useState(false);
 
@@ -35,7 +35,7 @@ const EditModal = () => {
     try {
       setIsLoading(true);
 
-      await axios.patch('/api/edit', { name, username, bio, image, coverImage });
+      await axios.patch('/api/edit', { name, username, bio, profileImage, coverImage });
       mutateFetchedUser();
 
       toast.success('Updated');
@@ -46,12 +46,12 @@ const EditModal = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [editModal, name, username, bio, mutateFetchedUser, image, coverImage]);
+  }, [editModal, name, username, bio, mutateFetchedUser, profileImage, coverImage]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      <Dropzone value={image} disabled={isLoading} onChange={(image) => setImage(image)} label="Upload profile image" />
-      <Dropzone value={coverImage} disabled={isLoading} onChange={(image) => setCoverImage(image)} label="Upload cover image" />
+      <ImageUpload value={profileImage} disabled={isLoading} onChange={(image) => setProfileImage(image)} label="Upload profile image" />
+      <ImageUpload value={coverImage} disabled={isLoading} onChange={(image) => setCoverImage(image)} label="Upload cover image" />
       <Input
         placeholder="Name"
         onChange={(e) => setName(e.target.value)}

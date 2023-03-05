@@ -9,7 +9,7 @@ interface DropzoneProps {
   disabled?: boolean;
 }
 
-const Dropzone: React.FC<DropzoneProps> = ({ onChange, label, value, disabled }) => {
+const ImageUpload: React.FC<DropzoneProps> = ({ onChange, label, value, disabled }) => {
   const [base64, setBase64] = useState(value);
 
   const handleChange = useCallback((base64: string) => {
@@ -47,4 +47,4 @@ const Dropzone: React.FC<DropzoneProps> = ({ onChange, label, value, disabled })
    );
 }
  
-export default Dropzone;
+export default ImageUpload;

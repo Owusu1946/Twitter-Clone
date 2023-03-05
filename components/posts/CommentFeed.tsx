@@ -1,4 +1,4 @@
-import PostItem from '@/components/posts/PostItem';
+import CommentItem from './CommentItem';
 
 interface CommentFeedProps {
   comments?: Record<string, any>[];
@@ -8,7 +8,7 @@ const CommentFeed: React.FC<CommentFeedProps> = ({ comments = [] }) => {
   return (
     <>
       {comments.map((comment: Record<string, any>,) => (
-        <PostItem isComment key={comment.id} data={comment} />
+        <CommentItem key={comment.id} data={comment} />
       ))}
     </>
   );

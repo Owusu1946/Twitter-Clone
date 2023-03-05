@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { useCallback } from "react";
 
 import useUser from "@/hooks/useUser";
-import useCurrentUser from "@/hooks/useCurrentUser";
 
 interface AvatarProps {
   userId: string;
@@ -45,7 +44,7 @@ const Avatar: React.FC<AvatarProps> = ({ userId, isLarge, hasBorder }) => {
         }}
         alt="Avatar"
         onClick={onClick}
-        src={fetchedUser?.image || '/images/placeholder.png'}
+        src={fetchedUser?.profileImage || '/images/placeholder.png'}
       />
     </div>
   );
