@@ -16,7 +16,7 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
   const { data: currentUser } = useCurrentUser();
   const { data: fetchedUser } = useUser(userId);
 
-  const { isFollowing, onFollow, onUnfollow } = useFollow(userId);
+  const { isFollowing, toggleFollow } = useFollow(userId);
 
   const createdAt = useMemo(() => {
     if (!fetchedUser?.createdAt) {
@@ -32,9 +32,9 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
       <div className="flex justify-end p-2">
         <Button
           disabled={currentUser?.id === userId}
-          onClick={isFollowing ? onUnfollow : onFollow} 
-          secondary 
+          onClick={toggleFollow} 
           label={isFollowing ? 'Unfollow' : 'Follow'}
+          secondary={!isFollowing}
           outline={isFollowing}
         />
       </div>
@@ -68,11 +68,11 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
         </div>
         <div className="flex flex-row items-center mt-4 gap-6">
           <div className="flex flex-row items-center gap-1">
-            <p className="text-white">0</p>
+            <p className="text-white">{fetchedUser?.followingIds?.length}</p>
             <p className="text-neutral-500">Following</p>
           </div>
           <div className="flex flex-row items-center gap-1">
-            <p className="text-white">0</p>
+            <p className="text-white">{fetchedUser?.followersCount || 0}</p>
             <p className="text-neutral-500">Followers</p>
           </div>
         </div>

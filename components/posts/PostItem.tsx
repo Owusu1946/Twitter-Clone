@@ -7,19 +7,23 @@ import useCurrentUser from '@/hooks/useCurrentUser';
 
 import Avatar from '../Avatar';
 
-const PostItem = () => {
+interface PostItemProps {
+  data: Record<string, any>;
+}
+
+const PostItem: React.FC<PostItemProps> = ({ data = {} }) => {
   const router = useRouter();
   const loginModal = useLoginModal();
   const { data: currentUser } = useCurrentUser();
-  
+
   const goToUser = useCallback((ev: any) => {
     ev.stopPropagation();
-    router.push('/users/123')
-  }, [router]);
+    router.push(`/users/${data.user.id}`)
+  }, [router, data.user.id]);
 
   const goToPost = useCallback(() => {
-    router.push('/posts/123');
-  }, [router]);
+    router.push(`/posts/${data.id}`);
+  }, [router, data.id]);
 
   const onLike = useCallback((ev: any) => {
     ev.stopPropagation();
@@ -41,7 +45,7 @@ const PostItem = () => {
         transition
       ">
       <div className="flex flex-row items-start gap-3">
-        <Avatar href="/users/123" />
+        <Avatar userId={data.user.id} />
         <div>
           <div className="flex flex-row items-center gap-2">
             <p 
@@ -52,7 +56,7 @@ const PostItem = () => {
                 cursor-pointer 
                 hover:underline
             ">
-              Elon Musk
+              {data.user.name}
             </p>
             <span 
               onClick={goToUser} 
@@ -61,14 +65,14 @@ const PostItem = () => {
                 cursor-pointer
                 hover:underline
             ">
-              @elonmusk
+              @{data.user.username}
             </span>
             <span className="text-neutral-500">
               2h
             </span>
           </div>
           <div className="text-white mt-1">
-            This is my very real Tweet!
+            {data.body}
           </div>
           <div className="flex flex-row items-center mt-3 gap-10">
             <div 

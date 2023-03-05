@@ -1,15 +1,18 @@
-import Header from '@/components/Header';
 import PostItem from '@/components/posts/PostItem';
 
+import usePosts from '@/hooks/usePosts';
+
 interface FeedProps {
-  posts?: Record<string, any>[];
+  userId?: string;
 }
 
-const Feed: React.FC<FeedProps> = ({ posts = [] }) => {
+const Feed: React.FC<FeedProps> = ({ userId }) => {
+  const { data: posts = [] } = usePosts(userId);
+
   return (
     <>
-      {posts.map((post, i) => (
-        <PostItem key={`post-${i}`} />
+      {posts.map((post: Record<string, any>,) => (
+        <PostItem key={post.id} data={post} />
       ))}
     </>
   );
