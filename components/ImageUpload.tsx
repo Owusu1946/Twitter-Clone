@@ -26,7 +26,15 @@ const ImageUpload: React.FC<DropzoneProps> = ({ onChange, label, value, disabled
       reader.readAsDataURL(file);
   }, [handleChange])
 
-  const { getRootProps, getInputProps } = useDropzone({ maxFiles: 1, onDrop: handleDrop, disabled });
+  const { getRootProps, getInputProps } = useDropzone({ 
+    maxFiles: 1, 
+    onDrop: handleDrop, 
+    disabled,
+    accept: {
+      'image/jpeg': [],
+      'image/png': [],
+    } 
+  });
 
   return ( 
     <div {...getRootProps({className: 'w-full p-4 text-white text-center border-2 border-dotted rounded-md border-neutral-700'})}>

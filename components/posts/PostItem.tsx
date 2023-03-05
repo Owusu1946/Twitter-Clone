@@ -10,14 +10,15 @@ import useLike from '@/hooks/useLike';
 import Avatar from '../Avatar';
 interface PostItemProps {
   data: Record<string, any>;
+  userId?: string;
 }
 
-const PostItem: React.FC<PostItemProps> = ({ data = {} }) => {
+const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
   const router = useRouter();
   const loginModal = useLoginModal();
 
   const { data: currentUser } = useCurrentUser();
-  const { hasLiked, toggleLike } = useLike(data.id);
+  const { hasLiked, toggleLike } = useLike({ postId: data.id, userId});
 
   const goToUser = useCallback((ev: any) => {
     ev.stopPropagation();

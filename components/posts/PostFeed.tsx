@@ -12,7 +12,7 @@ const PostFeed: React.FC<PostFeedProps> = ({ userId }) => {
   return (
     <>
       {posts.map((post: Record<string, any>,) => (
-        <PostItem key={post.id} data={post} />
+        <PostItem userId={userId} key={post.id} data={post} />
       ))}
     </>
   );
