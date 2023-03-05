@@ -12,9 +12,9 @@ const PostItem = () => {
   const loginModal = useLoginModal();
   const { data: currentUser } = useCurrentUser();
   
-  const goToProfile = useCallback((ev: any) => {
+  const goToUser = useCallback((ev: any) => {
     ev.stopPropagation();
-    router.push('/profiles/123')
+    router.push('/users/123')
   }, [router]);
 
   const goToPost = useCallback(() => {
@@ -41,11 +41,11 @@ const PostItem = () => {
         transition
       ">
       <div className="flex flex-row items-start gap-3">
-        <Avatar href="/profiles/123" />
+        <Avatar href="/users/123" />
         <div>
           <div className="flex flex-row items-center gap-2">
             <p 
-              onClick={goToProfile} 
+              onClick={goToUser} 
               className="
                 text-white 
                 font-semibold 
@@ -55,7 +55,7 @@ const PostItem = () => {
               Elon Musk
             </p>
             <span 
-              onClick={goToProfile} 
+              onClick={goToUser} 
               className="
                 text-neutral-500
                 cursor-pointer

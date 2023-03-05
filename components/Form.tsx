@@ -23,7 +23,7 @@ const Form: React.FC<FormProps> = ({ placeholder }) => {
     <div className="border-b-[1px] border-neutral-800 px-5 py-2">
       {currentUser ? (
         <div className="flex flex-row gap-4">
-          <Avatar href="/profiles/123" />
+          <Avatar userId={currentUser?.id} />
           <div className="w-full">
             <textarea 
               className="

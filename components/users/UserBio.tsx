@@ -1,40 +1,55 @@
-import { useCallback } from "react";
+import { useMemo } from "react";
 import { BiCalendar } from "react-icons/bi";
+import { format } from "date-fns";
 
-import useLoginModal from "@/hooks/useLoginModal";
 import useCurrentUser from "@/hooks/useCurrentUser";
+import useUser from "@/hooks/useUser";
+import useFollow from "@/hooks/useFollow";
 
 import Button from "../Button";
 
-const ProfileBio = () => {
-  const loginModal = useLoginModal();
-  const { data: currentUser } = useCurrentUser();
+interface UserBioProps {
+  userId: string;
+}
 
-  const onFollow = useCallback(() => {
-    if (!currentUser) {
-      return loginModal.onOpen();
+const UserBio: React.FC<UserBioProps> = ({ userId }) => {
+  const { data: currentUser } = useCurrentUser();
+  const { data: fetchedUser } = useUser(userId);
+
+  const { isFollowing, onFollow, onUnfollow } = useFollow(userId);
+
+  const createdAt = useMemo(() => {
+    if (!fetchedUser?.createdAt) {
+      return null;
     }
 
-    return;
-  }, [currentUser, loginModal]);
+    return format(new Date(fetchedUser.createdAt), 'MMMM yyyy');
+  }, [fetchedUser?.createdAt])
+
 
   return ( 
     <div className="border-b-[1px] border-neutral-800 pb-4">
       <div className="flex justify-end p-2">
-        <Button onClick={onFollow} secondary label="Follow" />
+        <Button
+          disabled={currentUser?.id === userId}
+          onClick={isFollowing ? onUnfollow : onFollow} 
+          secondary 
+          label={isFollowing ? 'Unfollow' : 'Follow'}
+          outline={isFollowing}
+        />
       </div>
       <div className="mt-8 px-4">
         <div className="flex flex-col">
           <p className="text-white text-2xl font-semibold">
-            Code With Antonio
+            {fetchedUser?.name}
           </p>
           <p className="text-md text-neutral-500">
-            @codewithantonio
+            @{fetchedUser?.username}
           </p>
         </div>
         <div className="flex flex-col mt-4">
           <p className="text-white">
-            As a software engineer with 7+ years of experience, I created Code With Antonio to share my love for programming and help others learn and grow in the field.
+            {fetchedUser?.bio}
           </p>
           <div 
             className="
@@ -47,7 +62,7 @@ const ProfileBio = () => {
           ">
             <BiCalendar size={24} />
             <p>
-              Joined March 2023
+              Joined {createdAt}
             </p>
           </div>
         </div>
@@ -66,4 +81,4 @@ const ProfileBio = () => {
    );
 }
  
-export default ProfileBio;
+export default UserBio;

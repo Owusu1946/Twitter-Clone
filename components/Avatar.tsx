@@ -1,36 +1,47 @@
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
 
+import useUser from "@/hooks/useUser";
+import useCurrentUser from "@/hooks/useCurrentUser";
+
 interface AvatarProps {
-  src?: string;
-  href: string;
+  userId: string;
   isLarge?: boolean;
   hasBorder?: boolean;
 }
 
-const Avatar: React.FC<AvatarProps> = ({ src, href, isLarge, hasBorder }) => {
+const Avatar: React.FC<AvatarProps> = ({ userId, isLarge, hasBorder }) => {
   const router = useRouter();
+
+  const { data: fetchedUser } = useUser(userId);
 
   const onClick = useCallback((event: any) => {
     event.stopPropagation();
-    router.push(href);
-  }, [router, href]);
 
-  return ( 
-    <img
-      onClick={onClick}
-      className={`
-        ${hasBorder ? 'border-4 border-black' : ''}
-        rounded-full 
-        ${isLarge ? 'w-32' : 'w-12'}
-        ${isLarge ? 'h-32' : 'h-12'}
-        hover:opacity-90 
-        transition 
-        cursor-pointer
-      `}
-      src="https://pbs.twimg.com/profile_images/1590968738358079488/IY9Gx6Ok_400x400.jpg" 
-    />
-   );
+    const url = `/users/${userId}`;
+
+    router.push(url);
+  }, [router, userId]);
+
+  return (
+    <div>
+      <Image
+        width={isLarge ? 128 : 48}
+        height={isLarge ? 128 : 48}
+        alt="Avatar"
+        onClick={onClick}
+        src={fetchedUser?.image || '/images/placeholder.png'}
+        className={`
+          ${hasBorder ? 'border-4 border-black' : ''}
+          rounded-full 
+          hover:opacity-90 
+          transition 
+          cursor-pointer
+        `}
+      />
+    </div>
+  );
 }
  
 export default Avatar;
