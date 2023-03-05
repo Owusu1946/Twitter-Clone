@@ -29,7 +29,7 @@ const UserView = () => {
       <Header showBackArrow label={fetchedUser?.name} />
       <UserHero userId={userId as string} />
       <UserBio userId={userId as string} />
-      <Feed userId={userId} />
+      <Feed userId={userId as string} />
     </>
    );
 }

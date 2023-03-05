@@ -7,7 +7,7 @@ interface FeedProps {
 }
 
 const Feed: React.FC<FeedProps> = ({ userId }) => {
-  const { data: posts = [] } = usePosts();
+  const { data: posts = [] } = usePosts(userId);
 
   return (
     <>
