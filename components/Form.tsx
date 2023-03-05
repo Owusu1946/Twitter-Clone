@@ -9,20 +9,24 @@ import useLoginModal from '@/hooks/useLoginModal';
 import useRegisterModal from '@/hooks/useRegisterModal';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import usePosts from '@/hooks/usePosts';
+import usePost from '@/hooks/usePost';
 
 import Avatar from './Avatar';
 import Button from './Button';
 
 interface FormProps {
   placeholder: string;
+  isComment?: boolean;
+  postId?: string;
 }
 
-const Form: React.FC<FormProps> = ({ placeholder }) => {
+const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
 
   const { data: currentUser } = useCurrentUser();
   const { mutate: mutatePosts } = usePosts();
+  const { mutate: mutatePost } = usePost(postId as string);
 
   const [body, setBody] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -31,19 +35,20 @@ const Form: React.FC<FormProps> = ({ placeholder }) => {
     try {
       setIsLoading(true);
 
-      console.log({ body })
+      const url = isComment ? `/api/comments?postId=${postId}` : '/api/posts';
 
-      await axios.post('/api/posts', { body });
+      await axios.post(url, { body });
 
       toast.success('Tweet created');
       setBody('');
       mutatePosts();
+      mutatePost();
     } catch (error) {
       toast.error('Something went wrong');
     } finally {
       setIsLoading(false);
     }
-  }, [body, mutatePosts]);
+  }, [body, mutatePosts, isComment, postId, mutatePost]);
 
   return (
     <div className="border-b-[1px] border-neutral-800 px-5 py-2">
@@ -94,7 +99,7 @@ const Form: React.FC<FormProps> = ({ placeholder }) => {
                   className="text-sky-500 cursor-pointer"
                 />
               </div>
-              <Button disabled={isLoading || !body} onClick={onSubmit} label="Tweet" />
+              <Button disabled={isLoading || !body} onClick={onSubmit} label={isComment ? 'Reply' : 'Tweet'} />
             </div>
           </div>
         </div>

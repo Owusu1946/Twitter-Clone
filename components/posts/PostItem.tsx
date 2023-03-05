@@ -10,9 +10,10 @@ import Avatar from '../Avatar';
 
 interface PostItemProps {
   data: Record<string, any>;
+  isComment?: boolean;
 }
 
-const PostItem: React.FC<PostItemProps> = ({ data = {} }) => {
+const PostItem: React.FC<PostItemProps> = ({ data = {}, isComment }) => {
   const router = useRouter();
   const loginModal = useLoginModal();
   const { data: currentUser } = useCurrentUser();
@@ -24,8 +25,12 @@ const PostItem: React.FC<PostItemProps> = ({ data = {} }) => {
   }, [router, data.user.id]);
 
   const goToPost = useCallback(() => {
+    if (isComment) {
+      return;
+    }
+
     router.push(`/posts/${data.id}`);
-  }, [router, data.id]);
+  }, [router, data.id, isComment]);
 
   const onLike = useCallback(async (ev: any) => {
     ev.stopPropagation();
@@ -80,41 +85,43 @@ const PostItem: React.FC<PostItemProps> = ({ data = {} }) => {
           <div className="text-white mt-1">
             {data.body}
           </div>
-          <div className="flex flex-row items-center mt-3 gap-10">
-            <div 
-              className="
-                flex 
-                flex-row 
-                items-center 
-                text-neutral-500 
-                gap-2 
-                cursor-pointer 
-                transition 
-                hover:text-sky-500
-            ">
-              <AiOutlineMessage size={20} />
-              <p>
-                300
-              </p>
+          {isComment ? null : (
+            <div className="flex flex-row items-center mt-3 gap-10">
+              <div 
+                className="
+                  flex 
+                  flex-row 
+                  items-center 
+                  text-neutral-500 
+                  gap-2 
+                  cursor-pointer 
+                  transition 
+                  hover:text-sky-500
+              ">
+                <AiOutlineMessage size={20} />
+                <p>
+                  {data.comments?.length || 0}
+                </p>
+              </div>
+              <div
+                onClick={onLike}
+                className="
+                  flex 
+                  flex-row 
+                  items-center 
+                  text-neutral-500 
+                  gap-2 
+                  cursor-pointer 
+                  transition 
+                  hover:text-red-500
+              ">
+                <LikeIcon color={hasLiked ? 'red' : ''} size={20} />
+                <p>
+                  {data.likedIds.length}
+                </p>
+              </div>
             </div>
-            <div
-              onClick={onLike}
-              className="
-                flex 
-                flex-row 
-                items-center 
-                text-neutral-500 
-                gap-2 
-                cursor-pointer 
-                transition 
-                hover:text-red-500
-            ">
-              <LikeIcon color={hasLiked ? 'red' : ''} size={20} />
-              <p>
-                {data.likedIds.length}
-              </p>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
