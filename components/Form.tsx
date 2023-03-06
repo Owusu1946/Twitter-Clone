@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useCallback, useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { BiImage } from 'react-icons/bi';
 
 import useLoginModal from '@/hooks/useLoginModal';
 import useRegisterModal from '@/hooks/useRegisterModal';
@@ -84,11 +83,7 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
                 border-neutral-800 
                 transition"
             />
-            <div className="mt-4 flex flex-row items-center justify-between">
-              <BiImage 
-                size={26} 
-                className="text-sky-500 cursor-pointer"
-              />
+            <div className="mt-4 flex flex-row justify-end">
               <Button disabled={isLoading || !body} onClick={onSubmit} label="Tweet" />
             </div>
           </div>
