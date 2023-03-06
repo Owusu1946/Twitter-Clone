@@ -26,29 +26,9 @@ model User {
   followingIds    String[] @db.ObjectId
   hasNotification Boolean?
 
-  accounts      Account[]
   posts         Post[]
   comments      Comment[]
   notifications Notification[]
-}
-
-model Account {
-  id                 String @id @default(auto()) @map("_id") @db.ObjectId
-  userId             String   @db.ObjectId
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.String
-  access_token       String?  @db.String
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.String
-  session_state      String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
 }
 
 model Post {
