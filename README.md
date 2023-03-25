@@ -7,6 +7,8 @@ This is a repository for a FullStack Twitter clone tutorial using React, NextJS,
 
 [VIDEO TUTORIAL](https://www.youtube.com/watch?v=ytkG7RT6SvU)
 
+[DOCKER VERSION by mandeepsingh10](https://github.com/mandeepsingh10/chwitter)
+
 We are going to learn funcionalities such as:
 
 - Authentication system
